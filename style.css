@@ -1,0 +1,602 @@
+/* -------------------------------------------------------------
+   Lanyard ID Badge Profile Theme
+   Inspired by cute retro-gaming & illustration employee badge
+------------------------------------------------------------- */
+
+:root {
+  --font-prompt: 'Prompt', -apple-system, sans-serif;
+  --font-badge: 'Rubik', 'Prompt', sans-serif;
+
+  /* Badge Color Scheme */
+  --bg-canvas: #f0f1ec;
+  --strap-color: #383042;
+  --strap-border: #1c1722;
+  --clip-metal: #dfd8de;
+  --clip-shadow: #9a8f9c;
+  
+  /* Red-Orange Holder Palette (ส้มแดงสดใส ทันสมัย) */
+  --holder-bg: #e6502c;
+  --holder-border: #42110a;
+  --holder-inner-border: #752012;
+  --slot-bg: #210603;
+  
+  --card-bg: #ffffff;
+  --card-header: #76638b;
+  --card-header-text: #ffffff;
+  --card-border: #3d3448;
+  --text-dark: #37333d;
+  --text-sub: #7b7584;
+  --dashed-line: #9c92a6;
+  
+  --badge-glow: rgba(0, 0, 0, 0.18);
+
+  /* Social Colors */
+  --color-ig: linear-gradient(135deg, #f09433, #dc2743, #bc1888);
+  --color-tiktok: #111116;
+  --color-fb: #1877f2;
+  --color-line: #06C755;
+}
+
+/* Dark Mode Palette */
+[data-theme="dark"] {
+  --bg-canvas: #181922;
+  --strap-color: #25202c;
+  --strap-border: #130f17;
+  --clip-metal: #7a6e7f;
+  --clip-shadow: #3f3644;
+  
+  /* Dark Mode: Burnt Red-Orange (ส้มแดงเข้มลึก) */
+  --holder-bg: #b0381e;
+  --holder-border: #240704;
+  --holder-inner-border: #471108;
+  --slot-bg: #140302;
+  
+  --card-bg: #272834;
+  --card-header: #554468;
+  --card-header-text: #f0ecf6;
+  --card-border: #1a1722;
+  --text-dark: #f0f0f5;
+  --text-sub: #9e9cb0;
+  --dashed-line: #5a5468;
+  
+  --badge-glow: rgba(0, 0, 0, 0.5);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: var(--font-prompt);
+  background-color: var(--bg-canvas);
+  color: var(--text-dark);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow-x: hidden;
+  position: relative;
+  transition: background-color 0.4s ease, color 0.4s ease;
+  perspective: 1200px;
+}
+
+/* Background Subtle Doodles / Pattern */
+.bg-pattern {
+  position: fixed;
+  inset: 0;
+  opacity: 0.12;
+  pointer-events: none;
+  background-image: radial-gradient(var(--text-sub) 1.5px, transparent 1.5px),
+                    radial-gradient(var(--text-sub) 1.5px, transparent 1.5px);
+  background-size: 32px 32px;
+  background-position: 0 0, 16px 16px;
+  z-index: 0;
+}
+
+/* Floating Theme Switcher Button */
+.floating-theme-btn {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--holder-border);
+  background: var(--card-bg);
+  color: var(--text-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.15rem;
+  box-shadow: 0 4px 15px var(--badge-glow);
+  z-index: 50;
+  transition: all 0.25s ease;
+}
+
+.floating-theme-btn:hover {
+  transform: scale(1.1) rotate(15deg);
+}
+
+/* Lanyard System Wrapper (Centered Hanging) */
+.lanyard-wrapper {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 520px;
+  padding: 0 16px 40px;
+  transform-origin: top center;
+  animation: lanyardSwing 3.5s ease-in-out infinite alternate;
+}
+
+@keyframes lanyardSwing {
+  0% { transform: rotate(-1deg); }
+  100% { transform: rotate(1deg); }
+}
+
+/* Lanyard Fabric Strap (สายคล้องคอแบบผ้าปกติ ไม่มีไอคอน) */
+.lanyard-strap {
+  position: relative;
+  z-index: 20;
+  width: 50px;
+  height: 100px;
+  background-color: var(--strap-color);
+  border-left: 3.5px solid var(--strap-border);
+  border-right: 3.5px solid var(--strap-border);
+  border-top: none;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.4), 0 6px 14px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: space-between;
+  padding: 0 4px;
+  /* Texture ลายเส้นถักผ้าละเอียด */
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.04) 0px,
+    rgba(255, 255, 255, 0.04) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+}
+
+.strap-stitching {
+  width: 2px;
+  height: 100%;
+  border-left: 2px dashed rgba(255, 255, 255, 0.28);
+}
+
+.strap-end-crimp {
+  position: absolute;
+  bottom: -4px;
+  left: -2px;
+  right: -2px;
+  height: 10px;
+  background: linear-gradient(180deg, #e2e8f0 0%, #94a3b8 50%, #64748b 100%);
+  border: 2.5px solid var(--strap-border);
+  border-radius: 3px;
+  z-index: 22;
+}
+
+/* -------------------------------------------------------------
+   ID Badge Holder (กรอบซองบัตรสีส้มแดง สเกลเดิม)
+------------------------------------------------------------- */
+.badge-holder {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  max-width: 480px;
+  background: var(--holder-bg);
+  border: 4px solid var(--holder-border);
+  border-radius: 28px;
+  padding: 18px 18px 22px;
+  box-shadow: 0 16px 40px var(--badge-glow), 0 4px 0 var(--holder-inner-border);
+  margin-top: 14px;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+}
+
+/* Capsule Connector (ทรงแคปซูล อยู่ Layer หลังสายคล้อง ไม่ทะลุ) */
+.capsule-connector {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Horizontal Oval Capsule Ring (ห่วงแคปซูลด้านบน อยู่หลังปลอกสายคล้อง) */
+.capsule-ring {
+  width: 32px;
+  height: 18px;
+  background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 50%, #94a3b8 100%);
+  border: 3.5px solid var(--holder-border);
+  border-radius: 12px;
+  box-shadow: inset 0 2px 3px rgba(255, 255, 255, 0.8), 0 3px 6px rgba(0, 0, 0, 0.25);
+  position: relative;
+  z-index: 1;
+}
+
+/* Vertical Rounded Capsule Tab (แท็บแคปซูลที่เชื่อมลงไปในช่องกลางของบัตร) */
+.capsule-body {
+  width: 14px;
+  height: 22px;
+  background: linear-gradient(180deg, #f1f5f9 0%, #cbd5e1 50%, #64748b 100%);
+  border: 3px solid var(--holder-border);
+  border-radius: 7px;
+  margin-top: -6px;
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.6), 0 3px 5px rgba(0, 0, 0, 0.2);
+  position: relative;
+  z-index: 1;
+}
+
+/* Clip Slots on Top of Holder */
+.holder-slots {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.slot {
+  height: 8px;
+  background: var(--slot-bg);
+  border-radius: 6px;
+  border: 2px solid var(--holder-border);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+.slot-center {
+  width: 52px;
+  height: 10px;
+  position: relative;
+}
+
+.slot-left,
+.slot-right {
+  width: 22px;
+}
+
+/* -------------------------------------------------------------
+   The ID Card Inside the Pocket (ตัวบัตรประจำตัว สเกลเดิม)
+------------------------------------------------------------- */
+.id-card {
+  position: relative;
+  background: var(--card-bg);
+  border: 3.5px solid var(--card-border);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.08), 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* Card Header Banner */
+.id-header {
+  background: var(--card-header);
+  color: var(--card-header-text);
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 3px solid var(--card-border);
+}
+
+.id-logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.id-mascot-icon {
+  width: 32px;
+  height: 32px;
+  background: #ffffff;
+  color: var(--card-header);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.id-logo-text {
+  font-family: var(--font-badge);
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+
+.id-dept-badge {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  font-family: var(--font-badge);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+  letter-spacing: 0.05em;
+}
+
+/* Card Body (Photo + Info Layout สเกลเดิม) */
+.id-body {
+  display: flex;
+  padding: 16px 14px 18px;
+  gap: 16px;
+}
+
+/* Left Column: Photo (สเกลเดิม 155px x 140px) */
+.id-photo-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 140px;
+  flex-shrink: 0;
+}
+
+.photo-frame {
+  position: relative;
+  width: 100%;
+  height: 155px;
+  background: #c5d4d6;
+  border: 3px solid var(--card-border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.id-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
+}
+
+/* Photo Copy Icon Button (ไอคอนคัดลอกเล็กๆ ใต้รูป) */
+.photo-copy-btn {
+  margin-top: 8px;
+  width: 34px;
+  height: 32px;
+  background: var(--card-bg);
+  border: 2px solid var(--card-border);
+  border-radius: 8px;
+  color: var(--text-dark);
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 var(--card-border);
+  transition: all 0.18s ease;
+}
+
+.photo-copy-btn:hover {
+  background: #06C755;
+  color: #ffffff;
+  border-color: var(--card-border);
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 var(--card-border);
+}
+
+.photo-copy-btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 var(--card-border);
+}
+
+/* Right Column: Name & Details */
+.id-info-col {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
+.id-name-box {
+  margin-bottom: 4px;
+}
+
+.id-name {
+  font-family: var(--font-badge);
+  font-size: 1.45rem;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  color: var(--text-dark);
+}
+
+.id-thai-name {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-sub);
+  margin-top: 2px;
+}
+
+.id-role-badge {
+  display: inline-block;
+  align-self: flex-start;
+  background: #6c577a;
+  color: #ffffff;
+  font-family: var(--font-badge);
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 5px;
+  margin-top: 6px;
+  letter-spacing: 0.03em;
+}
+
+.dashed-divider {
+  border-top: 2.5px dashed var(--dashed-line);
+  margin: 10px 0;
+  width: 100%;
+}
+
+/* -------------------------------------------------------------
+   Social Icon Cards (Minimalist Cards - Only Icons)
+------------------------------------------------------------- */
+.social-icon-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.social-card {
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  border: 2.5px solid var(--card-border);
+  background: var(--card-bg);
+  color: var(--text-dark);
+  font-size: 1.4rem;
+  text-decoration: none;
+  box-shadow: 2px 2px 0 var(--card-border);
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, color 0.18s ease;
+}
+
+.social-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--card-border);
+}
+
+.social-card:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 var(--card-border);
+}
+
+/* Specific Social Hover Colors */
+.card-ig:hover {
+  background: var(--color-ig);
+  color: #ffffff;
+}
+
+.card-tiktok:hover {
+  background: #000000;
+  color: #ffffff;
+}
+
+.card-fb:hover {
+  background: var(--color-fb);
+  color: #ffffff;
+}
+
+.card-line:hover {
+  background: var(--color-line);
+  color: #ffffff;
+}
+
+/* Barcode Section (บาร์โค้ดข้างบน ไอดีข้างล่าง) */
+.barcode-wrapper {
+  background: rgba(0, 0, 0, 0.04);
+  border: 2px dashed var(--dashed-line);
+  border-radius: 8px;
+  padding: 5px 10px 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+}
+
+[data-theme="dark"] .barcode-wrapper {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.barcode-lines {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 2px;
+  height: 16px;
+  width: 100%;
+}
+
+.barcode-lines span {
+  display: inline-block;
+  background: currentColor;
+  width: 2px;
+  height: 100%;
+}
+.barcode-lines span:nth-child(2n) { width: 3px; height: 80%; }
+.barcode-lines span:nth-child(3n) { width: 1.5px; height: 95%; }
+.barcode-lines span:nth-child(4n) { width: 4px; height: 100%; }
+.barcode-lines span:nth-child(5n) { width: 1px; height: 75%; }
+
+.barcode-info {
+  font-family: var(--font-badge);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--text-sub);
+  line-height: 1;
+}
+
+/* Toast Notification */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  background: #06C755;
+  color: #ffffff;
+  border: 2.5px solid var(--card-border);
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 3px 4px 0 var(--card-border);
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+  transition: all 0.25s ease;
+  z-index: 200;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 480px) {
+  .badge-holder {
+    padding: 14px 12px 18px;
+    border-radius: 24px;
+  }
+
+  .id-photo-col {
+    width: 110px;
+  }
+
+  .photo-frame {
+    height: 130px;
+  }
+
+  .id-name {
+    font-size: 1.25rem;
+  }
+
+  .social-card {
+    font-size: 1.25rem;
+  }
+
+  .lanyard-strap {
+    height: 80px;
+    width: 44px;
+  }
+}
