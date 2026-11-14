@@ -70,10 +70,45 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 2500);
   }
 
-  // 4. Copy Profile Link Button
-  copyProfileBtn.addEventListener('click', () => {
-    copyToClipboard(window.location.href, 'คัดลอกลิงก์โปรไฟล์เรียบร้อยแล้ว!');
-  });
+  // 4. Copy Profile Link Buttons
+  if (copyProfileBtn) {
+    copyProfileBtn.addEventListener('click', () => {
+      copyToClipboard(window.location.href, 'คัดลอกลิงก์โปรไฟล์เรียบร้อยแล้ว!');
+    });
+  }
+
+  const copyProfileBtn2 = document.getElementById('copyProfileBtn2');
+  if (copyProfileBtn2) {
+    copyProfileBtn2.addEventListener('click', () => {
+      copyToClipboard(window.location.href, 'คัดลอกลิงก์โปรไฟล์เรียบร้อยแล้ว!');
+    });
+  }
+
+  // 5. Flip Card Interaction (สลับฝั่งการ์ด พลิกดูอีก Profile)
+  const flipCardBtn = document.getElementById('flipCardBtn');
+  const idCardFlipper = document.getElementById('idCardFlipper');
+  const flipBtnLabel = document.getElementById('flipBtnLabel');
+  const flipSideIndicator = document.getElementById('flipSideIndicator');
+  let isFlipped = false;
+
+  if (flipCardBtn && idCardFlipper) {
+    flipCardBtn.addEventListener('click', () => {
+      toggleCardFlip();
+    });
+  }
+
+  function toggleCardFlip() {
+    isFlipped = !isFlipped;
+    idCardFlipper.classList.toggle('is-flipped', isFlipped);
+    flipCardBtn.classList.toggle('is-flipped', isFlipped);
+
+    if (flipBtnLabel) {
+      flipBtnLabel.textContent = isFlipped ? 'สลับกลับด้านหน้า' : 'สลับฝั่งโปรไฟล์';
+    }
+    if (flipSideIndicator) {
+      flipSideIndicator.textContent = isFlipped ? '2 / 2' : '1 / 2';
+    }
+  }
 
   function copyToClipboard(text, successMessage) {
     if (navigator.clipboard && navigator.clipboard.writeText) {
