@@ -69,11 +69,18 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+html {
+  overflow-x: hidden;
+  width: 100%;
+}
+
 body {
   font-family: var(--font-prompt);
   background-color: var(--bg-canvas);
   color: var(--text-dark);
   min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -269,25 +276,8 @@ body {
 }
 
 /* -------------------------------------------------------------
-   The ID Card Inside the Pocket (ตัวบัตรประจำตัว 3D Flip Card)
+   The ID Card Inside the Pocket (ตัวบัตรประจำตัว ขยายใหญ่ขึ้น)
 ------------------------------------------------------------- */
-.id-card-flip-wrap {
-  perspective: 1200px;
-  width: 100%;
-  position: relative;
-}
-
-.id-card-flipper {
-  position: relative;
-  width: 100%;
-  transform-style: preserve-3d;
-  transition: transform 0.75s cubic-bezier(0.34, 1.3, 0.64, 1);
-}
-
-.id-card-flipper.is-flipped {
-  transform: rotateY(180deg);
-}
-
 .id-card {
   position: relative;
   background: var(--card-bg);
@@ -295,147 +285,6 @@ body {
   border-radius: 20px;
   overflow: hidden;
   box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.08), 0 6px 16px rgba(0, 0, 0, 0.12);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-
-.id-card-front {
-  position: relative;
-  z-index: 2;
-  transform: rotateY(0deg);
-}
-
-.id-card-back {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  transform: rotateY(180deg);
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.id-header-back {
-  background: linear-gradient(135deg, #5b4672 0%, #46345a 100%);
-}
-
-.back-icon {
-  color: #f59e0b;
-}
-
-.photo-frame-back {
-  position: relative;
-}
-
-.photo-tag-overlay {
-  position: absolute;
-  bottom: 8px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--holder-bg);
-  color: #ffffff;
-  font-family: var(--font-badge);
-  font-size: 0.65rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  padding: 2px 8px;
-  border-radius: 12px;
-  border: 1.5px solid #ffffff;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  pointer-events: none;
-}
-
-.back-role-badge {
-  display: inline-block;
-  background: rgba(230, 80, 44, 0.12);
-  color: var(--holder-bg);
-  border: 1.5px solid var(--holder-bg);
-  padding: 3px 12px;
-  border-radius: 20px;
-  font-family: var(--font-badge);
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  margin-top: 4px;
-}
-
-[data-theme="dark"] .back-role-badge {
-  background: rgba(230, 80, 44, 0.22);
-  color: #ff7f50;
-  border-color: #ff7f50;
-}
-
-.back-bio-list {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-  margin: 10px 0 12px;
-}
-
-.bio-item {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  font-size: 0.85rem;
-  color: var(--text-dark);
-}
-
-.bio-item i {
-  width: 18px;
-  color: var(--holder-bg);
-  font-size: 0.9rem;
-  text-align: center;
-  flex-shrink: 0;
-}
-
-.bio-item strong {
-  font-family: var(--font-badge);
-  letter-spacing: 0.04em;
-}
-
-.back-actions-row {
-  display: flex;
-  gap: 8px;
-  margin-top: auto;
-}
-
-.back-action-btn {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  padding: 9px 8px;
-  border-radius: 12px;
-  font-size: 0.82rem;
-  font-weight: 700;
-  font-family: var(--font-badge);
-  text-decoration: none;
-  color: #ffffff;
-  border: 2px solid var(--card-border);
-  box-shadow: 2px 3px 0 var(--card-border);
-  transition: all 0.18s ease;
-}
-
-.back-action-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 2px 5px 0 var(--card-border);
-}
-
-.back-action-btn:active {
-  transform: translateY(1px);
-  box-shadow: 1px 1px 0 var(--card-border);
-}
-
-.back-action-btn.btn-line {
-  background: var(--color-line);
-}
-.back-action-btn.btn-ig {
-  background: var(--color-ig);
-}
-.back-action-btn.btn-tiktok {
-  background: var(--color-tiktok);
 }
 
 /* Card Header Banner */
@@ -558,6 +407,7 @@ body {
   flex-direction: column;
   flex-grow: 1;
   justify-content: space-between;
+  min-width: 0;
 }
 
 .id-name-box {
@@ -703,86 +553,6 @@ body {
   line-height: 1;
 }
 
-/* -------------------------------------------------------------
-   Bottom Flip Button Area (ปุ่มไอคอนสลับฝั่งการ์ด พลิกดูอีก Profile)
-------------------------------------------------------------- */
-.flip-controls-wrap {
-  margin-top: 18px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 10;
-  position: relative;
-}
-
-.flip-card-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  padding: 9px 22px 9px 12px;
-  background: var(--card-bg);
-  color: var(--text-dark);
-  border: 3px solid var(--holder-border);
-  border-radius: 50px;
-  font-family: var(--font-badge);
-  font-size: 0.95rem;
-  font-weight: 800;
-  cursor: pointer;
-  box-shadow: 0 4px 0 var(--holder-border), 0 8px 20px var(--badge-glow);
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  user-select: none;
-}
-
-.flip-card-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 0 var(--holder-border), 0 12px 24px var(--badge-glow);
-  background: #ffffff;
-}
-
-.flip-card-btn:active {
-  transform: translateY(2px);
-  box-shadow: 0 1px 0 var(--holder-border), 0 4px 8px var(--badge-glow);
-}
-
-[data-theme="dark"] .flip-card-btn:hover {
-  background: #333446;
-}
-
-.flip-icon-box {
-  width: 32px;
-  height: 32px;
-  background: var(--holder-bg);
-  color: #ffffff;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.95rem;
-  border: 2px solid var(--holder-border);
-  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.flip-card-btn:hover .flip-icon-box {
-  transform: rotate(180deg);
-}
-
-.flip-btn-label {
-  letter-spacing: 0.03em;
-}
-
-.flip-side-indicator {
-  font-size: 0.75rem;
-  font-weight: 700;
-  background: rgba(0, 0, 0, 0.08);
-  padding: 2px 8px;
-  border-radius: 10px;
-  color: var(--text-sub);
-}
-
-[data-theme="dark"] .flip-side-indicator {
-  background: rgba(255, 255, 255, 0.12);
-}
-
 /* Toast Notification */
 .toast {
   position: fixed;
@@ -810,67 +580,246 @@ body {
   transform: translateY(0);
 }
 
-/* Mobile Responsiveness */
-@media (max-width: 480px) {
+/* -------------------------------------------------------------
+   Responsive Mobile Optimization (ไม่แหว่ง ไม่ล้น ทุกขนาดหน้าจอ)
+------------------------------------------------------------- */
+@media (max-width: 580px) {
+  .lanyard-wrapper {
+    padding: 0 14px 30px;
+  }
+
   .badge-holder {
-    padding: 16px 14px 20px;
-    border-radius: 26px;
+    padding: 18px 16px 22px;
+    border-radius: 28px;
   }
 
   .id-photo-col {
-    width: 125px;
+    width: 135px;
   }
 
   .photo-frame {
-    height: 150px;
-  }
-
-  .photo-copy-btn {
-    width: 36px;
-    height: 32px;
-    font-size: 0.95rem;
+    height: 155px;
   }
 
   .id-name {
-    font-size: 1.4rem;
+    font-size: 1.45rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .floating-theme-btn {
+    top: 12px;
+    right: 12px;
+    width: 38px;
+    height: 38px;
+    font-size: 1rem;
   }
 
-  .social-card {
-    font-size: 1.4rem;
+  .lanyard-wrapper {
+    padding: 0 10px 24px;
   }
 
   .lanyard-strap {
-    height: 90px;
+    height: 75px;
+    width: 46px;
+  }
+
+  .strap-end-crimp {
+    height: 10px;
+  }
+
+  .badge-holder {
+    padding: 13px 11px 17px;
+    border-radius: 24px;
+    border-width: 3.5px;
+    margin-top: 10px;
+  }
+
+  .holder-slots {
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+
+  .slot-center {
     width: 48px;
+    height: 9px;
   }
 
-  .back-bio-list {
-    gap: 4px;
-    margin: 6px 0 8px;
+  .slot-left,
+  .slot-right {
+    width: 20px;
+    height: 7px;
   }
 
-  .bio-item {
-    font-size: 0.76rem;
-    gap: 6px;
+  .capsule-connector {
+    top: -20px;
   }
 
-  .back-actions-row {
-    gap: 6px;
+  .capsule-ring {
+    width: 32px;
+    height: 18px;
+    border-width: 2.5px;
   }
 
-  .back-action-btn {
-    font-size: 0.72rem;
-    padding: 7px 4px;
+  .capsule-body {
+    width: 14px;
+    height: 20px;
+    border-width: 2.5px;
   }
 
-  .flip-card-btn {
-    padding: 8px 18px 8px 10px;
-    font-size: 0.88rem;
+  .id-card {
+    border-width: 3px;
+    border-radius: 16px;
   }
 
-  .flip-icon-box {
+  .id-header {
+    padding: 10px 12px;
+    border-bottom-width: 2.5px;
+  }
+
+  .id-logo-wrap {
+    gap: 8px;
+  }
+
+  .id-mascot-icon {
     width: 28px;
     height: 28px;
+    font-size: 0.95rem;
+  }
+
+  .id-logo-text {
+    font-size: 1.2rem;
+  }
+
+  .id-dept-badge {
+    font-size: 0.72rem;
+    padding: 2px 7px;
+  }
+
+  .id-body {
+    padding: 12px 10px 14px;
+    gap: 10px;
+  }
+
+  .id-photo-col {
+    width: 105px;
+  }
+
+  .photo-frame {
+    height: 132px;
+    border-width: 2.5px;
+    border-radius: 10px;
+  }
+
+  .photo-copy-btn {
+    margin-top: 6px;
+    width: 32px;
+    height: 28px;
     font-size: 0.85rem;
+    border-radius: 7px;
+  }
+
+  .id-name {
+    font-size: 1.25rem;
+  }
+
+  .id-thai-name {
+    font-size: 0.82rem;
+  }
+
+  .id-role-badge {
+    font-size: 0.68rem;
+    padding: 3px 8px;
+    margin-top: 4px;
+  }
+
+  .dashed-divider {
+    margin: 8px 0;
+  }
+
+  .social-icon-cards {
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+
+  .social-card {
+    font-size: 1.2rem;
+    border-radius: 8px;
+    border-width: 2px;
+    box-shadow: 1.5px 1.5px 0 var(--card-border);
+  }
+
+  .barcode-wrapper {
+    padding: 4px 6px;
+    gap: 2px;
+  }
+
+  .barcode-lines {
+    height: 14px;
+    gap: 1.5px;
+  }
+
+  .barcode-info {
+    font-size: 0.62rem;
+    letter-spacing: 0.05em;
+  }
+}
+
+@media (max-width: 370px) {
+  .lanyard-wrapper {
+    padding: 0 6px 20px;
+  }
+
+  .badge-holder {
+    padding: 10px 8px 14px;
+    border-radius: 20px;
+  }
+
+  .id-body {
+    padding: 10px 7px 12px;
+    gap: 8px;
+  }
+
+  .id-photo-col {
+    width: 90px;
+  }
+
+  .photo-frame {
+    height: 118px;
+  }
+
+  .id-name {
+    font-size: 1.1rem;
+  }
+
+  .id-thai-name {
+    font-size: 0.75rem;
+  }
+
+  .id-logo-text {
+    font-size: 1.05rem;
+  }
+
+  .id-role-badge {
+    font-size: 0.62rem;
+    padding: 2px 6px;
+  }
+
+  .social-icon-cards {
+    gap: 4px;
+  }
+
+  .social-card {
+    font-size: 1.05rem;
+  }
+
+  .barcode-lines {
+    height: 12px;
+    gap: 1px;
+  }
+
+  .barcode-info {
+    font-size: 0.52rem;
+    letter-spacing: 0.03em;
   }
 }

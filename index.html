@@ -53,178 +53,86 @@
         <span class="slot slot-right"></span>
       </div>
 
-      <!-- The Real ID Card Flip Container (ตัวบัตรด้านในแบบพลิก 3D) -->
-      <div class="id-card-flip-wrap" id="idCardFlipWrap">
-        <div class="id-card-flipper" id="idCardFlipper">
+      <!-- The Real ID Card (ตัวบัตรด้านใน) -->
+      <div class="id-card">
+        <!-- Top Banner Header -->
+        <div class="id-header">
+          <div class="id-logo-wrap">
+            <span class="id-mascot-icon"><i class="fa-solid fa-id-badge"></i></span>
+            <span class="id-logo-text">Profile Card</span>
+          </div>
+          <div class="id-dept-badge">ID-7027959291</div>
+        </div>
 
-          <!-- ================= SIDE A (หน้าการ์ดหลัก) ================= -->
-          <div class="id-card id-card-front">
-            <!-- Top Banner Header -->
-            <div class="id-header">
-              <div class="id-logo-wrap">
-                <span class="id-mascot-icon"><i class="fa-solid fa-id-badge"></i></span>
-                <span class="id-logo-text">Profile Card</span>
-              </div>
-              <div class="id-dept-badge">SIDE 01</div>
+        <!-- Card Body -->
+        <div class="id-body">
+          <!-- Left Column: Photo & Copy Button -->
+          <div class="id-photo-col">
+            <div class="photo-frame">
+              <img src="myphoto.JPG" alt="Noraset Hunlor" class="id-avatar-img">
             </div>
-
-            <!-- Card Body -->
-            <div class="id-body">
-              <!-- Left Column: Photo & Copy Button -->
-              <div class="id-photo-col">
-                <div class="photo-frame">
-                  <img src="myphoto.JPG" alt="Noraset Hunlor" class="id-avatar-img">
-                </div>
-                <!-- ปุ่มคัดลอกเหลือแค่ไอคอนเล็กๆ ใต้รูป -->
-                <button id="copyProfileBtn" class="photo-copy-btn" title="คัดลอกลิงก์โปรไฟล์"
-                  aria-label="คัดลอกลิงก์โปรไฟล์">
-                  <i class="fa-regular fa-copy"></i>
-                </button>
-              </div>
-
-              <!-- Right Column: Info & Social Icons -->
-              <div class="id-info-col">
-                <div class="id-name-box">
-                  <h1 class="id-name">NORASET H.</h1>
-                  <div class="id-thai-name">Amplai</div>
-                </div>
-
-                <div class="id-role-badge">AMWAY • CREATOR</div>
-
-                <!-- Dashed separator -->
-                <div class="dashed-divider"></div>
-
-                <!-- Social Icon Cards Grid (เหลือเฉพาะไอคอน) -->
-                <div class="social-icon-cards">
-                  <!-- 1. Instagram -->
-                  <a href="https://www.instagram.com/nxr_pl/" target="_blank" rel="noopener noreferrer"
-                    class="social-card card-ig" title="Instagram (@nxr_pl)" aria-label="Instagram">
-                    <i class="fa-brands fa-instagram"></i>
-                  </a>
-
-                  <!-- 2. TikTok -->
-                  <a href="https://www.tiktok.com/@am.plai?lang=en" target="_blank" rel="noopener noreferrer"
-                    class="social-card card-tiktok" title="TikTok (@am.plai)" aria-label="TikTok">
-                    <i class="fa-brands fa-tiktok"></i>
-                  </a>
-
-                  <!-- 3. Facebook -->
-                  <a href="https://web.facebook.com/noraset.hunlor" target="_blank" rel="noopener noreferrer"
-                    class="social-card card-fb" title="Facebook (Noraset Hunlor)" aria-label="Facebook">
-                    <i class="fa-brands fa-facebook-f"></i>
-                  </a>
-
-                  <!-- 4. LINE Add -->
-                  <a href="https://line.me/ti/p/U03M5SRt75" target="_blank" rel="noopener noreferrer"
-                    class="social-card card-line" title="LINE Add (@am.plai)" aria-label="LINE Add">
-                    <i class="fa-brands fa-line"></i>
-                  </a>
-                </div>
-
-                <!-- ID Card Barcode (บาร์โค้ดข้างบน ไอดีข้างล่าง) -->
-                <div class="barcode-wrapper" aria-hidden="true">
-                  <div class="barcode-lines">
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span>
-                  </div>
-                  <div class="barcode-info">200411097027959291</div>
-                </div>
-              </div>
-            </div>
+            <!-- ปุ่มคัดลอกเหลือแค่ไอคอนเล็กๆ ใต้รูป -->
+            <button id="copyProfileBtn" class="photo-copy-btn" title="คัดลอกลิงก์โปรไฟล์"
+              aria-label="คัดลอกลิงก์โปรไฟล์">
+              <i class="fa-regular fa-copy"></i>
+            </button>
           </div>
 
-          <!-- ================= SIDE B (อีก Profile: Business & Bio) ================= -->
-          <div class="id-card id-card-back">
-            <!-- Top Banner Header -->
-            <div class="id-header id-header-back">
-              <div class="id-logo-wrap">
-                <span class="id-mascot-icon back-icon"><i class="fa-solid fa-sparkles"></i></span>
-                <span class="id-logo-text">Business Profile</span>
-              </div>
-              <div class="id-dept-badge">SIDE 02</div>
+          <!-- Right Column: Info & Social Icons -->
+          <div class="id-info-col">
+            <div class="id-name-box">
+              <h1 class="id-name">NORASET H.</h1>
+              <div class="id-thai-name">Amplai</div>
             </div>
 
-            <!-- Card Body -->
-            <div class="id-body id-body-back">
-              <!-- Left Column: Photo & Action -->
-              <div class="id-photo-col">
-                <div class="photo-frame photo-frame-back">
-                  <img src="myphoto.JPG" alt="Noraset Hunlor" class="id-avatar-img">
-                  <div class="photo-tag-overlay">OFFICIAL</div>
-                </div>
-                <button id="copyProfileBtn2" class="photo-copy-btn" title="คัดลอกลิงก์โปรไฟล์"
-                  aria-label="คัดลอกลิงก์โปรไฟล์">
-                  <i class="fa-regular fa-share-from-square"></i>
-                </button>
+            <div class="id-role-badge">AMWAY • CREATOR</div>
+
+            <!-- Dashed separator -->
+            <div class="dashed-divider"></div>
+
+            <!-- Social Icon Cards Grid (เหลือเฉพาะไอคอน) -->
+            <div class="social-icon-cards">
+              <!-- 1. Instagram -->
+              <a href="https://www.instagram.com/nxr_pl/" target="_blank" rel="noopener noreferrer"
+                class="social-card card-ig" title="Instagram (@nxr_pl)" aria-label="Instagram">
+                <i class="fa-brands fa-instagram"></i>
+              </a>
+
+              <!-- 2. TikTok -->
+              <a href="https://www.tiktok.com/@am.plai?lang=en" target="_blank" rel="noopener noreferrer"
+                class="social-card card-tiktok" title="TikTok (@am.plai)" aria-label="TikTok">
+                <i class="fa-brands fa-tiktok"></i>
+              </a>
+
+              <!-- 3. Facebook -->
+              <a href="https://web.facebook.com/noraset.hunlor" target="_blank" rel="noopener noreferrer"
+                class="social-card card-fb" title="Facebook (Noraset Hunlor)" aria-label="Facebook">
+                <i class="fa-brands fa-facebook-f"></i>
+              </a>
+
+              <!-- 4. LINE Add -->
+              <a href="https://line.me/ti/p/U03M5SRt75" target="_blank" rel="noopener noreferrer"
+                class="social-card card-line" title="LINE Add (@am.plai)" aria-label="LINE Add">
+                <i class="fa-brands fa-line"></i>
+              </a>
+            </div>
+
+            <!-- ID Card Barcode (บาร์โค้ดข้างบน ไอดีข้างล่าง) -->
+            <div class="barcode-wrapper" aria-hidden="true">
+              <div class="barcode-lines">
+                <span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span>
               </div>
-
-              <!-- Right Column: Info & Details -->
-              <div class="id-info-col">
-                <div class="id-name-box">
-                  <h2 class="id-name">AMPLAI (แอมปลาย)</h2>
-                  <div class="id-thai-name">Noraset Hunlor</div>
-                </div>
-
-                <div class="id-role-badge back-role-badge">BUSINESS • LIFESTYLE</div>
-
-                <div class="dashed-divider"></div>
-
-                <!-- Business & Bio Detail Rows -->
-                <div class="back-bio-list">
-                  <div class="bio-item">
-                    <i class="fa-solid fa-briefcase"></i>
-                    <span>Amway ABO: <strong>200411097027959291</strong></span>
-                  </div>
-                  <div class="bio-item">
-                    <i class="fa-solid fa-heart-pulse"></i>
-                    <span>Health & Wellness Consultant</span>
-                  </div>
-                  <div class="bio-item">
-                    <i class="fa-solid fa-location-dot"></i>
-                    <span>Bangkok, Thailand</span>
-                  </div>
-                </div>
-
-                <!-- Quick Action Buttons -->
-                <div class="back-actions-row">
-                  <a href="https://line.me/ti/p/U03M5SRt75" target="_blank" rel="noopener noreferrer"
-                    class="back-action-btn btn-line" title="ทัก LINE โดยตรง">
-                    <i class="fa-brands fa-line"></i>
-                    <span>ทัก LINE</span>
-                  </a>
-                  <a href="https://www.instagram.com/nxr_pl/" target="_blank" rel="noopener noreferrer"
-                    class="back-action-btn btn-ig" title="Instagram Direct">
-                    <i class="fa-brands fa-instagram"></i>
-                    <span>ทัก IG</span>
-                  </a>
-                  <a href="https://www.tiktok.com/@am.plai?lang=en" target="_blank" rel="noopener noreferrer"
-                    class="back-action-btn btn-tiktok" title="TikTok">
-                    <i class="fa-brands fa-tiktok"></i>
-                    <span>TikTok</span>
-                  </a>
-                </div>
-              </div>
+              <div class="barcode-info">200411097027959291</div>
             </div>
           </div>
-
         </div>
       </div>
     </main>
-
-    <!-- Bottom Flip Controls (พื้นที่ด้านล่าง: ปุ่มไอคอนสลับฝั่งการ์ด พลิกดูอีก Profile) -->
-    <div class="flip-controls-wrap">
-      <button id="flipCardBtn" class="flip-card-btn" aria-label="สลับฝั่งการ์ด พลิกดูอีก Profile" title="คลิกเพื่อสลับฝั่งการ์ด">
-        <span class="flip-icon-box">
-          <i class="fa-solid fa-arrows-rotate"></i>
-        </span>
-        <span class="flip-btn-label" id="flipBtnLabel">สลับฝั่งโปรไฟล์</span>
-        <span class="flip-side-indicator" id="flipSideIndicator">1 / 2</span>
-      </button>
-    </div>
   </div>
 
   <!-- Toast Notification -->
